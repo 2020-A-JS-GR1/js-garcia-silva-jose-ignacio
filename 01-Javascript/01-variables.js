@@ -62,3 +62,44 @@ if(1){
 }else{
     console.log("Es falso") //!
 }
+
+if(null){
+    console.log("Es verdadero");
+}else{
+    console.log("Es falso") //!
+}
+
+if(undefined){
+    console.log("Es verdadero");
+}else{
+    console.log("Es falso") //!
+}
+
+// Orden de importancia
+// 1) const
+// 2) "let"
+// 3) X -> "var"
+
+// Objetos Js (JSON)
+
+const jose = {
+    nombre: "José I.", // llave: valor,
+    "apellido": 'García',
+    edad: 31,
+    hijos: null,
+    zapatos: undefined,
+    ropa: {
+        color: 'plomo',
+        talla: '40',
+    },
+    mascotas: ['Cachetes', 'Pequitas', 'Panda']
+}; // object
+jose.nombre; // "José I."
+jose.apellido; // 'García
+
+
+
+const arregloNumeros = []; //object
+
+console.log(jose);
+console.log(arregloNumeros);
