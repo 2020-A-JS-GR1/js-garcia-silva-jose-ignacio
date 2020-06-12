@@ -81,7 +81,6 @@ if(undefined){
 // 3) X -> "var"
 
 // Objetos Js (JSON)
-
 const jose = {
     nombre: "José I.", // llave: valor,
     "apellido": 'García',
@@ -96,8 +95,6 @@ const jose = {
 }; // object
 jose.nombre; // "José I."
 jose.apellido; // 'García
-
-
 
 const arregloNumeros = []; //object
 
