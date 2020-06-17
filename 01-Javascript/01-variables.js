@@ -93,10 +93,75 @@ const jose = {
     },
     mascotas: ['Cachetes', 'Pequitas', 'Panda']
 }; // object
+// Acceder a las propiedades del objeto
 jose.nombre; // "José I."
 jose.apellido; // 'García
+jose["nombre"];// "Jose I."
+console.log(jose);
+jose.nombre = "Ignacio";
+console.log(jose);
+jose["nombre"] = "Jose I.";
+console.log(jose);
+jose.sueldo; // undefined
+console.log(jose.sueldo); //undefined
+jose.sueldo = 1.2;
+console.log(jose.sueldo); // 1.2
+jose["gastos"] = 0.8;
+console.log(jose.gastos); // 0.8
+jose.nombre = undefined;
+console.log(jose);
+delete jose.nombre; // Eliminar la llave "nombre
 
-const arregloNumeros = []; //object
+Object.keys(jose);
+console.log(Object.keys(jose));
+console.log(Object.values(jose));
 
+//Lista de variables por valor en JS
+// number
+// string
+// boolean
+// undefined
+
+let edadAdrian = 31;
+let edadVicente = edadAdrian; // 31
+console.log(edadAdrian); // 31
+edadAdrian = edadAdrian + 1;
+console.log(edadAdrian); // 32
+console.log(edadVicente); // 31
+
+// Lista de variables por REFERENCIA en JS
+/*
+let rafael = {
+ /*
+    nombre: "Rafael"
+};
+let lenin = rafael;
+console.log(rafael);
+console.log(lenin);
+lenin.nombre = "Lenin";
+console.log(rafael);
+console.log(lenin);
+delete rafael.nombre;
+console.log(rafael);
+console.log(lenin);
+*/
+
+let rafael = {
+    nombre: "Rafael"
+};
+let lenin = Object.assign({}, rafael);
+// let lenin = Object.assign({}, rafael);
+console.log(rafael);
+console.log(lenin);
+lenin.nombre = "Lenin";
+delete rafael.nombre;
+console.log(rafael);
+console.log(lenin);
+let arregloClonado = Object.assign([], [1,2,3,4,5])
+console.log(arregloClonado);
+
+/*const arregloNumeros = []; //object
 console.log(jose);
 console.log(arregloNumeros);
+*/
+
