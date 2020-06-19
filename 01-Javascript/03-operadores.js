@@ -90,9 +90,27 @@ console.log('respuestaFind', respuestaForEach); // undefined
 
 // MAP
 // devolver NUEVO ELEMENTO
-const respuestMap = arreglo
+const respuestaMap = arreglo
     .map(
-        function(valorActual, indiceActual, arregloCompleot) {
+        (valorActual, indiceActual, arregloCompleot) => {
+            const nuevoElemento = {
+                id: valorActual.id,
+                nombre: valorActual.nombre,
+                nota: valorActual.nota + 1,
+            };
+            return nuevoElemento
+        }
+    );
+console.log('respuestaMapNuevo', respuestaMapNuevo);
+console.log('arreglo', arreglo);
+
+// MAP
+// devolver NUEVO ELEMENTO
+const respuestaMapNuevo = arreglo
+    .map(
+        // Función Anónima -> NO TIENE NOMBRE
+        // Función de Flecha GORDA
+        (valorActual, indiceActual, arregloCompleot) => {
             valorActual.nota = valorActual.nota + 1;
             return valorActual;
         }
@@ -100,3 +118,13 @@ const respuestMap = arreglo
 console.log('respuestaMapNuevo', respuestaMapNuevo);
 console.log('arreglo', arreglo);
 
+// FILTER
+// devolver EXPRESION TRUTY FALSY
+const respuestaMapFilter = arreglo
+    .filter(
+        (valorActual, indiceActual, arregloCompleot) => {
+            return valorActual.nota >= 14;
+        }
+    );
+console.log('respuestaMapNuevo', respuestaMapNuevo);
+console.log('arreglo', arreglo);
