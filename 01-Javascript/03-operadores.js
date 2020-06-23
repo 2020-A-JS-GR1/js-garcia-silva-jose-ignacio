@@ -1,118 +1,120 @@
 const arreglo = [
     {
-        id:1,
-        nombre: 'José',
-        nota:5
+        id: 1,
+        nombre: 'Adrian',
+        nota: 5
     },
     {
-        id:2,
-        nombre: 'Ignacio',
-        nota:4
-    },
-    {
-        id:3,
-        nombre: 'Johanna',
-        nota:6
-    },
-    {
-        id:4,
-        nombre: 'Daniel',
-        nota:7
-    },
-    {
-        id:5,
-        nombre: 'Juan',
-        nota:2
-    },
-    {
-        id:6,
+        id: 2,
         nombre: 'Vicente',
-        nota:9
+        nota: 8
     },
     {
-        id:7,
-        nombre: 'Iván',
-        nota:17
+        id: 3,
+        nombre: 'Carolina',
+        nota: 14
     },
     {
-        id:8,
-        nombre: 'Katherin',
-        nota:6
+        id: 4,
+        nombre: 'Wendy',
+        nota: 16
     },
     {
-        id:9,
-        nombre: 'Camilo',
-        nota:13
+        id: 5,
+        nombre: 'Andrea',
+        nota: 19
     },
     {
-        id:10,
-        nombre: 'Felipe',
-        nota:14
+        id: 6,
+        nombre: 'Pamela',
+        nota: 19
+    },
+    {
+        id: 7,
+        nombre: 'Cristian',
+        nota: 20
+    },
+    {
+        id: 8,
+        nombre: 'Daniel',
+        nota: 19
+    },
+    {
+        id: 9,
+        nombre: 'Lilly',
+        nota: 14
+    },
+    {
+        id: 10,
+        nombre: 'Ramiro',
+        nota: 12
     }
-]
+];
 
 // FUNCIONES COMO PARAMETROS
 
 // FIND
-// devolver una expersion -> TRUTY FALSY
+// devolver una expresion -> TRUTY FALSY
 const respuestaFind = arreglo
-.find(
-    function(valorActual, indiceActual, arregloCompleto) {
-        console.log('valorActual', valorActual);
-        console.log('indiceActual', indiceActual);
-        console.log('arregloCompleto', arregloCompleto);
-        return valorActual.nombre === "Vicente";
-    }
-);
-console.log('respuestaFind', respuestaFind); // undefined
-
-const respuestaIndex = arreglo
-    .findIndex(
-        function(valorActual, indiceActual, arregloCompleto) {
+    .find(
+        function (valorActual, indiceActual, arregloCompleto) {
             console.log('valorActual', valorActual);
             console.log('indiceActual', indiceActual);
             console.log('arregloCompleto', arregloCompleto);
-            return valorActual.nombre === "Vicente";
+            return valorActual.nombre === "Cristian";
         }
     );
-console.log('respuestaFind', respuestaIndex); // undefined
+console.log('respuestaFind', respuestaFind);  // undefined
 
+// FINDINDEX
+// devolver una expresion -> TRUTY FALSY
+const respuestaIndex = arreglo
+    .findIndex(
+        function (valorActual, indiceActual, arregloCompleto) {
+            console.log('valorActual', valorActual);
+            console.log('indiceActual', indiceActual);
+            console.log('arregloCompleto', arregloCompleto);
+            return valorActual.nombre === "Cristian";
+        }
+    );
+console.log('respuestaIndex', respuestaIndex);  // undefined
+
+
+// for (let i; i>arreglo.length; i--){
+//     console.log('valorActual', arreglo[i]);
+// }
 // FOREACH
 const respuestaForEach = arreglo
     .forEach(
-        function(valorActual, indiceActual, arregloCompleto) {
+        function (valorActual, indiceActual, arregloCompleto) {
             console.log('valorActual', valorActual);
             console.log('indiceActual', indiceActual);
             console.log('arregloCompleto', arregloCompleto);
         }
     );
-console.log('respuestaFind', respuestaForEach); // undefined
+console.log('respuestaForEach', respuestaForEach);  // undefined
 
 // MAP
 // devolver NUEVO ELEMENTO
 const respuestaMap = arreglo
     .map(
-        (valorActual, indiceActual, arregloCompleot) => {
+        (valorActual, indiceActual, arregloCompleto) => {
             const nuevoElemento = {
                 id: valorActual.id,
                 nombre: valorActual.nombre,
                 nota: valorActual.nota + 1,
             };
-            return nuevoElemento
+            return nuevoElemento;
         }
     );
-console.log('respuestaMapNuevo', respuestaMapNuevo);
+console.log('respuestaMap', respuestaMap);
 console.log('arreglo', arreglo);
-
-// MAP
-// devolver NUEVO ELEMENTO
 const respuestaMapNuevo = arreglo
     .map(
-        // Función Anónima -> NO TIENE NOMBRE
-        // Función de Flecha GORDA
-        (valorActual, indiceActual, arregloCompleot) => {
-            valorActual.nota = valorActual.nota + 1;
-            return valorActual;
+        // Funcion Anonima -> NO TIENE NOMBRE
+        // Funcion de flecha GORDA
+        (valorActual, indiceActual, arregloCompleto) => {
+            return valorActual.nota;
         }
     );
 console.log('respuestaMapNuevo', respuestaMapNuevo);
@@ -120,11 +122,57 @@ console.log('arreglo', arreglo);
 
 // FILTER
 // devolver EXPRESION TRUTY FALSY
-const respuestaMapFilter = arreglo
+const respuestaFilter = arreglo
     .filter(
-        (valorActual, indiceActual, arregloCompleot) => {
+        (valorActual, indiceActual, arregloCompleto) => {
             return valorActual.nota >= 14;
         }
     );
-console.log('respuestaMapNuevo', respuestaMapNuevo);
+console.log('respuestaFilter', respuestaFilter);
 console.log('arreglo', arreglo);
+
+// SOME -> expresion
+// DEVUELVE BOOLEANO
+// Hay ALGUNA nota menor a nueve? SI NO
+// OR
+const respuestaSome = arreglo
+    .some(
+        (valorActual, indiceActual, arregloCompleto) => {
+            return valorActual.nota < 9;
+        }
+    );
+console.log('respuestaSome', respuestaSome);
+
+
+// EVERY -> expresion
+// DEVUELVE BOOLEANO
+// TODAS las notas son mayores a 14? SI NO
+// AND
+
+const respuestaEvery = arreglo
+    .every(
+        (valorActual, indiceActual, arregloCompleto) => {
+            return valorActual.nota > 14;
+        }
+    );
+console.log('respuestaEvery', respuestaEvery);
+
+// [1,2,3,4,5,6,5,4,3,1]
+// reduce           izq -> der
+// reduce           der -> izq
+const respuestaReduce = arreglo
+    .reduce(
+        (valorAcumulado, valorActual, indice, arreglo)=>{
+            return valorAcumulado + valorActual.nota;
+        },
+        0 // Acumulador
+    )
+console.log('respuestaReduce', respuestaReduce);
+
+/*
+const arreglosEstudiantesMenoresAlNueve = arreglo
+    .map((v)=>v.nota * 1.3) // añadiendo el 30%
+    .filter((nota)=> nota < 9) // Busco a los < 9
+    .reduce((acumulado, actual)=> acumulado + actual, 0); // total
+const notaPromedio = totalPuntosEstudiantes / arreglosEstudiantesMenoresAlNueve.length;
+ */
