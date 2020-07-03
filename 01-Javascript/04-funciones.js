@@ -42,10 +42,17 @@ function sumarNumeros(numeroInicial, //number
                       ...otrosNumeros){ // Parámetros Infinitos []
     return numeroInicial + otrosNumeros.reduce((a, v) => a + v, 0);
 }
-sumarNumeros(1,2,3,4,5,6,7,8,9,10);
+
+// sumarNumeros(1,2,3,4,5,6,7,8,9,10);
+sumarNumeros(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+const arreglo = [0, 1, 2];
 
 function sumarArreglo(arregloParametro) {
-    const clonArreglo = Object.assign([].arregloParametro);
+    const clonArreglo = Object.assign([],arregloParametro);
     clonArreglo[0] = 100;
-    
+    return clonArreglo;
 }
+
+console.log(sumarArreglo(arreglo));
+console.log('arreglo', arreglo);
