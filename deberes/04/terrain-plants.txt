@@ -1,1 +1,1 @@
-This is the first plant
+[{"id":"00000001","type":"polygon","area":"100","perimeter":"40","soil":"silt","wasteland":false,"plants":[{"id":"0000000001","name":"Pine","scientificName":"Pinus","perennial":true,"avgLifeSpan":1000,"diseaseResistant":false}]}]
