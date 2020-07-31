@@ -46,20 +46,41 @@ function createNewId(terrains){
         return "00000001";
     }
 }
+async function showAnimatedTree(){
+    console.log(await readFilePromise('./resources/tree/01-tree_part.txt'));
+    await new Promise(r => setTimeout(r, 250));
+    clear();
+    console.log(await readFilePromise('./resources/tree/02-tree_part.txt'));
+    await new Promise(r => setTimeout(r, 250));
+    clear();
+    console.log(await readFilePromise('./resources/tree/03-tree_part.txt'));
+    await new Promise(r => setTimeout(r, 250));
+    clear();
+    console.log(await readFilePromise('./resources/tree/04-tree_part.txt'));
+    await new Promise(r => setTimeout(r, 250));
+    clear();
+    console.log(await readFilePromise('./resources/tree/05-tree_part.txt'));
+    await new Promise(r => setTimeout(r, 250));
+    clear();
+    console.log(await readFilePromise('./resources/tree/06-tree_part.txt'));
+    await new Promise(r => setTimeout(r, 250));
+    clear();
+    console.log(await readFilePromise('./resources/tree/07-tree_part.txt'));
+    await new Promise(r => setTimeout(r, 500));
+    clear();
+}
 
 const terrainType = ['irregular', 'polygon', 'circular'];
 const soilType = ['sandy', 'clay', 'silt', 'peat', 'chalk', ];
 
 async function main() {
     clear();
-    console.log('Welcome to the Terrain-Plants information system');
-
     try{
-        const content = await readFilePromise('./terrain-plants.txt')
-        const terrains = JSON.parse(content);
-
+        //Retrieve the data from the file
+        const terrains = JSON.parse(await readFilePromise('./terrain-plants.txt'));
         let question = "1";
         while(question !== "Exit"){
+            console.log(await readFilePromise('./resources/banner.txt'));
             const terrainShowList = terrains.map(function (valorActual) {
                 return valorActual.id;
             });
@@ -68,14 +89,14 @@ async function main() {
                     type: 'list',
                     name: 'mainMenuActions',
                     message: 'What do you want to do?',
-                    choices: ['Add new', 'Exit'].concat(terrainShowList)
+                    choices: ['Add new Terrain', 'Exit'].concat(terrainShowList)
                 }
             ]);
             clear();
             question = answer.mainMenuActions;
             switch (question) {
-                case "Add new":
-                    console.log('Add new Terrain');
+                case "Add new Terrain":
+                    console.log(await readFilePromise('./resources/add_terrain.txt'));
                     while(question !== true){
                         answer = await inquirer.prompt([
                             {
@@ -141,6 +162,7 @@ async function main() {
                                 wasteland: answer.wasteland,
                                 plants: []
                             })
+                            clear();
                         }
                         await writeFilePromise('./terrain-plants.txt', JSON.stringify(terrains))
                     }
@@ -155,12 +177,13 @@ async function main() {
                         }
                     );
                     while(question !== "Back"){
+                        console.log(await readFilePromise('./resources/show_terrain.txt'));
                         console.log('ID: ', terrain.id);
                         console.log('Type: ', terrain.type);
                         console.log('Area: ', terrain.area);
                         console.log('Perimeter: ', terrain.perimeter);
                         console.log('Soil: ', terrain.soil);
-                        console.log('Wasteland: ', terrain.wasteland);
+                        console.log('Wasteland: ', terrain.wasteland,'\n');
                         answer =  await inquirer.prompt([
                             {
                                 type: 'list',
@@ -175,6 +198,7 @@ async function main() {
                         switch (question) {
                             case "Show Plants":
                                 while(question !== "Close"){
+                                    console.log(await readFilePromise('./resources/show_plants.txt'))
                                     const plantsShowList = terrain.plants.map(
                                         function (valorActual) {
                                             return valorActual.name;
@@ -192,7 +216,7 @@ async function main() {
                                     question = answer.ShowPlantsActions;
                                     switch (question) {
                                         case "Add new":
-                                            console.log('Add new Plant');
+                                            console.log(await readFilePromise('./resources/add_plant.txt'));
                                             while(question !== true){
                                                 answer = await inquirer.prompt([
                                                     {
@@ -249,6 +273,8 @@ async function main() {
                                                 }
                                                 await writeFilePromise('./terrain-plants.txt', JSON.stringify(terrains))
                                             }
+                                            clear();
+                                            await showAnimatedTree();
                                             break;
                                         case "Close":
                                             break;
@@ -259,13 +285,13 @@ async function main() {
                                                 }
                                             );
                                             while(question !== "Back"){
+                                                console.log(await readFilePromise('./resources/show_plant.txt'));
                                                 console.log('ID: ', plant.id);
                                                 console.log('Name: ', plant.name);
                                                 console.log('scientificName: ', plant.scientificName);
                                                 console.log('Perennial: ', plant.perennial);
                                                 console.log('Average Life Span (years): ', plant.avgLifeSpan);
                                                 console.log('Disease Resistant: ', plant.diseaseResistant);
-
                                                 answer =  await inquirer.prompt([
                                                     {
                                                         type: 'list',
@@ -294,6 +320,7 @@ async function main() {
                                                                 return element.id === terrain.id
                                                             }
                                                         );
+                                                        console.log(await readFilePromise('./resources/edit_plant.txt'));
                                                         while(question !== true) {
                                                             //Delete ID OPTION
                                                             const attributeOptions = Object.keys(plantEdit);
@@ -387,20 +414,32 @@ async function main() {
                                                         }
                                                         break;
                                                     case "Delete Plant":
-                                                        const terrainDeleteIndex = terrains.findIndex(
-                                                            function (element) {
-                                                                return element.id === terrain.id
+                                                        answer = await inquirer.prompt([
+                                                            {
+                                                                type: 'confirm',
+                                                                name: 'confirmDeletePlant',
+                                                                message: 'Are you sure you want to delete it?',
+                                                                default: false
                                                             }
-                                                        );
-                                                        const plantDeleteIndex = terrain.plants.findIndex(
-                                                            function (element) {
-                                                                return element.id === plant.id
-                                                            }
-                                                        );
-                                                        terrains[terrainDeleteIndex].plants.splice(plantDeleteIndex, 1);
-                                                        console.log('Terrain deleted successfully');
-                                                        question = "Back";
-                                                        await writeFilePromise('./terrain-plants.txt', JSON.stringify(terrains, ));
+                                                        ]);
+                                                        question = answer.confirmDeletePlant;
+                                                        if(question === true){
+                                                            const terrainDeleteIndex = terrains.findIndex(
+                                                                function (element) {
+                                                                    return element.id === terrain.id
+                                                                }
+                                                            );
+                                                            const plantDeleteIndex = terrain.plants.findIndex(
+                                                                function (element) {
+                                                                    return element.id === plant.id
+                                                                }
+                                                            );
+                                                            terrains[terrainDeleteIndex].plants.splice(plantDeleteIndex, 1);
+                                                            console.log('Terrain deleted successfully');
+                                                            question = "Back";
+                                                            await writeFilePromise('./terrain-plants.txt', JSON.stringify(terrains, ));
+                                                        }
+                                                        clear();
                                                         break;
                                                     case "Back":
                                                         break;
@@ -420,6 +459,7 @@ async function main() {
                                         return element.id === terrain.id
                                     }
                                 );
+                                console.log(await readFilePromise('./resources/edit_terrain.txt'));
                                 while(question !== true) {
                                     //Delete ID and Plants OPTION
                                     const attributeOptions = Object.keys(terrainEdit);
@@ -521,17 +561,29 @@ async function main() {
                                             break;
                                     }
                                 }
+                                clear();
                                 break;
                             case "Delete Terrain":
-                                const terrainDeleteIndex = terrains.findIndex(
+                                answer = await inquirer.prompt([
+                                    {
+                                        type: 'confirm',
+                                        name: 'confirmDeleteTerrain',
+                                        message: 'Are you sure you want to delete it?',
+                                        default: false
+                                    }
+                                ]);
+                                question = answer.confirmDeleteTerrain;
+                                if(question === true){
+                                    const terrainDeleteIndex = terrains.findIndex(
                                         function (element) {
                                             return element.id === terrain.id
                                         }
                                     );
-                                terrains.splice(terrainDeleteIndex, 1);
-                                console.log('Terrain deleted successfully');
-                                question = "Back";
-                                await writeFilePromise('./terrain-plants.txt', JSON.stringify(terrains));
+                                    terrains.splice(terrainDeleteIndex, 1);
+                                    question = "Back";
+                                    await writeFilePromise('./terrain-plants.txt', JSON.stringify(terrains));
+                                }
+                                clear();
                                 break;
                             case "Back":
                                 break;
@@ -546,7 +598,3 @@ async function main() {
 
 }
 main();
-
-//console.log(JSON.stringify(terrains));
-
-//console.log('respuestaForEach', terrainShowList);  // undefined
